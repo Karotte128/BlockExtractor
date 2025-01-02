@@ -1,8 +1,7 @@
 package com.Karotte128.blockextractor.block;
 
-import com.mojang.serialization.MapCodec;
+import com.Karotte128.blockextractor.BlockEntity.ExtractorBlockEntity;
 import net.minecraft.core.BlockPos;
-import net.minecraft.world.level.block.BaseEntityBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -14,8 +13,9 @@ public class ExtractorBlock extends Block implements EntityBlock {
         super(properties);
     }
 
+    @Nullable
     @Override
-    public @Nullable BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
-        return null;
+    public BlockEntity newBlockEntity(BlockPos blockPos, BlockState blockState) {
+        return new ExtractorBlockEntity(blockPos, blockState);
     }
 }
