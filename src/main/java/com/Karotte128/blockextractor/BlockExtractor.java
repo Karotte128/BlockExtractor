@@ -1,5 +1,6 @@
 package com.Karotte128.blockextractor;
 
+import com.Karotte128.blockextractor.BlockEntity.ModBlockEntities;
 import com.Karotte128.blockextractor.block.ModBlocks;
 import com.Karotte128.blockextractor.item.ModCreativeModeTabs;
 import com.Karotte128.blockextractor.item.ModItems;
@@ -32,6 +33,7 @@ public class BlockExtractor {
         ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
+        ModBlockEntities.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
 
