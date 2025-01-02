@@ -1,5 +1,7 @@
 package com.Karotte128.blockextractor;
 
+import com.Karotte128.blockextractor.block.ModBlocks;
+import com.Karotte128.blockextractor.item.ModItems;
 import com.mojang.logging.LogUtils;
 
 import net.neoforged.api.distmarker.Dist;
@@ -25,6 +27,9 @@ public class BlockExtractor {
         modEventBus.addListener(this::commonSetup);
 
         NeoForge.EVENT_BUS.register(this);
+
+        ModItems.register(modEventBus);
+        ModBlocks.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
 
