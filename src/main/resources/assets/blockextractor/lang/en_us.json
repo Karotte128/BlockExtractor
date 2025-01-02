@@ -1,5 +1,5 @@
 {
-  "itemGroup.blockextractor": "Block Extractor",
+  "itemGroup.blockextractor_tab": "Block Extractor",
   "block.blockextractor.extractor_block": "Extractor",
   "block.blockextractor.example_block": "Example Block",
   "item.blockextractor.example_item": "Example Item"

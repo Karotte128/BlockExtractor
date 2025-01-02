@@ -1,6 +1,7 @@
 package com.Karotte128.blockextractor;
 
 import com.Karotte128.blockextractor.block.ModBlocks;
+import com.Karotte128.blockextractor.item.ModCreativeModeTabs;
 import com.Karotte128.blockextractor.item.ModItems;
 import com.mojang.logging.LogUtils;
 
@@ -28,6 +29,7 @@ public class BlockExtractor {
 
         NeoForge.EVENT_BUS.register(this);
 
+        ModCreativeModeTabs.register(modEventBus);
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
 
