@@ -1,0 +1,5 @@
+{
+  "itemGroup.blockextractor": "Example Mod Tab",
+  "block.blockextractor.example_block": "Example Block",
+  "item.blockextractor.example_item": "Example Item"
+}
