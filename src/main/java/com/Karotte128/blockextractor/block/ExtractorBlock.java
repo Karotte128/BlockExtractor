@@ -23,9 +23,14 @@ public class ExtractorBlock extends Block implements EntityBlock {
         return new ExtractorBlockEntity(blockPos, blockState);
     }
 
-    @SuppressWarnings("unchecked") // Due to generics, an unchecked cast is necessary here.
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
-        return type == ModBlockEntities.EXTRACTOR_BLOCK_ENTITY.get() ? (BlockEntityTicker<T>) ExtractorBlockEntity::tick : null;
-    }
+@SuppressWarnings("unchecked")
+@Nullable
+@Override
+public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState state, BlockEntityType<T> type) {
+        if (type == ModBlockEntities.EXTRACTOR_BLOCK_ENTITY.get()) {
+            return (BlockEntityTicker<T>) ExtractorBlockEntity::tick;
+        } else {
+            return null;
+        }
+    };
 }
