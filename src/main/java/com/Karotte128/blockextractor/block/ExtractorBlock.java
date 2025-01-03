@@ -1,7 +1,7 @@
 package com.Karotte128.blockextractor.block;
 
-import com.Karotte128.blockextractor.BlockEntity.ExtractorBlockEntity;
-import com.Karotte128.blockextractor.BlockEntity.ModBlockEntities;
+import com.Karotte128.blockextractor.blockentity.ExtractorBlockEntity;
+import com.Karotte128.blockextractor.blockentity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;

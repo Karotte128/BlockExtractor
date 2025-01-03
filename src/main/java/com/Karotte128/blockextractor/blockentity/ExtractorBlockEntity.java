@@ -1,4 +1,4 @@
-package com.Karotte128.blockextractor.BlockEntity;
+package com.Karotte128.blockextractor.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.world.entity.item.ItemEntity;

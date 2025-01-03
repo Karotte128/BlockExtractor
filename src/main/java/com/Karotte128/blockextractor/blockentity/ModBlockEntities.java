@@ -1,4 +1,4 @@
-package com.Karotte128.blockextractor.BlockEntity;
+package com.Karotte128.blockextractor.blockentity;
 
 import com.Karotte128.blockextractor.BlockExtractor;
 import com.Karotte128.blockextractor.block.ModBlocks;

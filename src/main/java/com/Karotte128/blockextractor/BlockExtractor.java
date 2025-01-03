@@ -1,6 +1,6 @@
 package com.Karotte128.blockextractor;
 
-import com.Karotte128.blockextractor.BlockEntity.ModBlockEntities;
+import com.Karotte128.blockextractor.blockentity.ModBlockEntities;
 import com.Karotte128.blockextractor.block.ModBlocks;
 import com.Karotte128.blockextractor.item.ModCreativeModeTabs;
 import com.Karotte128.blockextractor.item.ModItems;
