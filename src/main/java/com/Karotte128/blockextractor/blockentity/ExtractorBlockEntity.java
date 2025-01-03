@@ -12,18 +12,19 @@ public class ExtractorBlockEntity extends BlockEntity {
         super(ModBlockEntities.EXTRACTOR_BLOCK_ENTITY.get(), pos, state);
     }
 
-    private static int tickCounter = 0;
+int tickCounter = 0;
 
     public static <T extends BlockEntity> void tick(Level level, BlockPos blockPos, BlockState blockState, T t) {
+        ExtractorBlockEntity tile = (ExtractorBlockEntity) t;
 
-        ExtractorBlockEntity.tickCounter++;
+        tile.tickCounter++;
 
-        if (ExtractorBlockEntity.tickCounter == 40) {
+        if (tile.tickCounter == 40) {
             BlockPos belowPos = blockPos.below();
             BlockState belowBlockState = level.getBlockState(belowPos);
             ItemStack itemStack = new ItemStack(belowBlockState.getBlock().asItem());
             level.addFreshEntity(new ItemEntity(level, blockPos.getX() + 0.5, blockPos.getY() + 1, blockPos.getZ() + 0.5, itemStack));
-            ExtractorBlockEntity.tickCounter = 0;
+            tile.tickCounter = 0;
         }
     }
 }
