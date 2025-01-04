@@ -1,9 +1,10 @@
 package com.Karotte128.blockextractor.blockentity;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
-import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
@@ -116,5 +117,18 @@ public class ExtractorBlockEntity extends BaseContainerBlockEntity {
     @Override
     protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
         return null;
+    }
+
+    protected void saveAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.saveAdditional(tag, registries);
+        tag.putShort("TickCounter", (short)this.tickCounter);
+        ContainerHelper.saveAllItems(tag, this.items, registries);
+    }
+
+    protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
+        super.loadAdditional(tag, registries);
+        this.items = NonNullList.withSize(this.getContainerSize(), ItemStack.EMPTY);
+        ContainerHelper.loadAllItems(tag, this.items, registries);
+        this.tickCounter = tag.getShort("TickCounter");
     }
 }
