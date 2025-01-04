@@ -3,6 +3,7 @@ package com.Karotte128.blockextractor.block;
 import com.Karotte128.blockextractor.blockentity.ExtractorBlockEntity;
 import com.Karotte128.blockextractor.blockentity.ModBlockEntities;
 import net.minecraft.core.BlockPos;
+import net.minecraft.world.Containers;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.EntityBlock;
@@ -33,4 +34,9 @@ public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, Block
             return null;
         }
     };
+
+    protected void onRemove(BlockState state, Level level, BlockPos pos, BlockState newState, boolean isMoving) {
+        Containers.dropContentsOnDestroy(state, newState, level, pos);
+        super.onRemove(state, level, pos, newState, isMoving);
+    }
 }
