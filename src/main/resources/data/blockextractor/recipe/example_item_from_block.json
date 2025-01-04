@@ -1,0 +1,9 @@
+{
+  "type": "blockextractor:extracting",
+  "ingredient": {
+    "item": "blockextractor:example_block"
+  },
+  "result": {
+    "id": "blockextractor:example_item"
+  }
+}

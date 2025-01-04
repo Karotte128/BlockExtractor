@@ -4,6 +4,7 @@ import com.Karotte128.blockextractor.blockentity.ModBlockEntities;
 import com.Karotte128.blockextractor.block.ModBlocks;
 import com.Karotte128.blockextractor.item.ModCreativeModeTabs;
 import com.Karotte128.blockextractor.item.ModItems;
+import com.Karotte128.blockextractor.recipe.ModRecipes;
 import com.mojang.logging.LogUtils;
 
 import net.neoforged.api.distmarker.Dist;
@@ -34,6 +35,7 @@ public class BlockExtractor {
         ModItems.register(modEventBus);
         ModBlocks.register(modEventBus);
         ModBlockEntities.register(modEventBus);
+        ModRecipes.register(modEventBus);
 
         modEventBus.addListener(this::addCreative);
 

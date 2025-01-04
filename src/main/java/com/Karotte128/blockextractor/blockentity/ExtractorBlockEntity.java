@@ -1,5 +1,8 @@
 package com.Karotte128.blockextractor.blockentity;
 
+import com.Karotte128.blockextractor.recipe.BlockExtractorInput;
+import com.Karotte128.blockextractor.recipe.BlockExtractorRecipe;
+import com.Karotte128.blockextractor.recipe.ModRecipes;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.HolderLookup;
 import net.minecraft.core.NonNullList;
@@ -10,10 +13,13 @@ import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+
+import java.util.Optional;
 
 public class ExtractorBlockEntity extends BaseContainerBlockEntity {
     public ExtractorBlockEntity(BlockPos pos, BlockState state) {
@@ -33,19 +39,26 @@ public class ExtractorBlockEntity extends BaseContainerBlockEntity {
             if (tile.tickCounter == 20) {
                 BlockPos belowPos = blockPos.below();
                 BlockState belowBlockState = level.getBlockState(belowPos);
-                ItemStack itemStack = new ItemStack(belowBlockState.getBlock().asItem());
+                ItemStack inputStack = new ItemStack(belowBlockState.getBlock().asItem());
                 ItemStack containerItemStack = tile.getItem(0);
-                if (containerItemStack.getItem().equals(itemStack.getItem())) {
+
+                Optional<RecipeHolder<BlockExtractorRecipe>> recipe = tile.level.getRecipeManager().getRecipeFor(ModRecipes.BLOCK_EXTRACTOR_TYPE.get(), new BlockExtractorInput(inputStack), level);
+
+                if(!recipe.isEmpty()) {
+                ItemStack outputStack = new ItemStack(recipe.get().value().output().getItem(), 1);
+
+                if (containerItemStack.getItem().equals(outputStack.getItem())) {
                     int count = tile.getItem(0).getCount();
                     int newCount = Math.min(count + 1, 64);
                     containerItemStack.setCount(newCount);
                     tile.setItem(0, containerItemStack);
                 } else if (containerItemStack.isEmpty()) {
-                    tile.setItem(0, itemStack);
+                    tile.setItem(0, outputStack);
                 }
                 tile.tickCounter = 0;
             }
         }
+    }
     }
 
     private NonNullList<ItemStack> items = NonNullList.withSize(
