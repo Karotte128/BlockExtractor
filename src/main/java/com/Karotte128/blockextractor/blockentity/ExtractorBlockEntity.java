@@ -2,19 +2,24 @@ package com.Karotte128.blockextractor.blockentity;
 
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.Container;
 import net.minecraft.world.ContainerHelper;
-import net.minecraft.world.entity.item.ItemEntity;
+import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
+import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
-public class ExtractorBlockEntity extends BlockEntity implements Container {
+public class ExtractorBlockEntity extends BaseContainerBlockEntity {
     public ExtractorBlockEntity(BlockPos pos, BlockState state) {
         super(ModBlockEntities.EXTRACTOR_BLOCK_ENTITY.get(), pos, state);
     }
+
+    public static final int SIZE = 9;
 
     int tickCounter = 0;
 
@@ -37,19 +42,33 @@ public class ExtractorBlockEntity extends BlockEntity implements Container {
                 } else if (containerItemStack.isEmpty()) {
                     tile.setItem(0, itemStack);
                 }
-                //level.addFreshEntity(new ItemEntity(level, blockPos.getX() + 0.5, blockPos.getY() + 1, blockPos.getZ() + 0.5, itemStack));
                 tile.tickCounter = 0;
             }
         }
     }
 
-    private final NonNullList<ItemStack> items = NonNullList.withSize(
-            1,
+    private NonNullList<ItemStack> items = NonNullList.withSize(
+            SIZE,
             ItemStack.EMPTY
     );
     @Override
     public int getContainerSize() {
-        return 1;
+        return SIZE;
+    }
+
+    @Override
+    protected Component getDefaultName() {
+        return Component.translatable("container.blockextractor.extractorblockentity");
+    }
+
+    @Override
+    protected NonNullList<ItemStack> getItems() {
+        return items;
+    }
+
+    @Override
+    protected void setItems(NonNullList<ItemStack> nonNullList) {
+        this.items = items;
     }
 
     @Override
@@ -92,5 +111,10 @@ public class ExtractorBlockEntity extends BlockEntity implements Container {
     public void clearContent() {
         items.clear();
         this.setChanged();
+    }
+
+    @Override
+    protected AbstractContainerMenu createMenu(int i, Inventory inventory) {
+        return null;
     }
 }
