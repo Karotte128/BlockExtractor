@@ -19,8 +19,8 @@ public class ModCreativeModeTabs {
             () -> CreativeModeTab.builder().icon(() -> new ItemStack(ModBlocks.EXTRACTOR_BLOCK.get()))
                     .title(Component.translatable("itemGroup.blockextractor_tab"))
                     .displayItems((itemDisplayParameters, output) -> {
-                        output.accept(ModItems.EXAMPLE);
-                        output.accept(ModBlocks.EXAMPLE_BLOCK);
+                        //output.accept(ModItems.EXAMPLE);
+                        //output.accept(ModBlocks.EXAMPLE_BLOCK);
                         output.accept(ModBlocks.EXTRACTOR_BLOCK);
                     })
                     .build());
