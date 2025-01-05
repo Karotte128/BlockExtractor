@@ -65,7 +65,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
 
     public void drops() {
         SimpleContainer inv = new SimpleContainer(itemHandler.getSlots());
-        for(int i = 0; i < itemHandler.getSlots(); i++) {
+        for (int i = 0; i < itemHandler.getSlots(); i++) {
             inv.setItem(i, itemHandler.getStackInSlot(i));
         }
         Containers.dropContents(this.level, this.worldPosition, inv);

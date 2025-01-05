@@ -20,7 +20,7 @@ public record BlockExtractorRecipe(Ingredient inputItem, ItemStack output) imple
 
     @Override
     public boolean matches(BlockExtractorInput pInput, Level pLevel) {
-        if(pLevel.isClientSide()) {
+        if (pLevel.isClientSide()) {
             return false;
         }
 
@@ -53,15 +53,8 @@ public record BlockExtractorRecipe(Ingredient inputItem, ItemStack output) imple
     }
 
     public static class Serializer implements RecipeSerializer<BlockExtractorRecipe> {
-        public static final MapCodec<BlockExtractorRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
-                Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(BlockExtractorRecipe::inputItem),
-                ItemStack.CODEC.fieldOf("result").forGetter(BlockExtractorRecipe::output)
-        ).apply(inst, BlockExtractorRecipe::new));
-        public static final StreamCodec<RegistryFriendlyByteBuf, BlockExtractorRecipe> STREAM_CODEC =
-                StreamCodec.composite(
-                        Ingredient.CONTENTS_STREAM_CODEC, BlockExtractorRecipe::inputItem,
-                        ItemStack.STREAM_CODEC, BlockExtractorRecipe::output,
-                        BlockExtractorRecipe::new);
+        public static final MapCodec<BlockExtractorRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(Ingredient.CODEC_NONEMPTY.fieldOf("ingredient").forGetter(BlockExtractorRecipe::inputItem), ItemStack.CODEC.fieldOf("result").forGetter(BlockExtractorRecipe::output)).apply(inst, BlockExtractorRecipe::new));
+        public static final StreamCodec<RegistryFriendlyByteBuf, BlockExtractorRecipe> STREAM_CODEC = StreamCodec.composite(Ingredient.CONTENTS_STREAM_CODEC, BlockExtractorRecipe::inputItem, ItemStack.STREAM_CODEC, BlockExtractorRecipe::output, BlockExtractorRecipe::new);
 
         @Override
         public MapCodec<BlockExtractorRecipe> codec() {
