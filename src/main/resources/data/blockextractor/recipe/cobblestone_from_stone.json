@@ -1,0 +1,9 @@
+{
+  "type": "blockextractor:extracting",
+  "block": {
+    "item": "minecraft:stone"
+  },
+  "result": {
+    "id": "minecraft:cobblestone"
+  }
+}
