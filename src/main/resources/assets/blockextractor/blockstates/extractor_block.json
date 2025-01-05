@@ -1,0 +1,7 @@
+{
+  "variants": {
+    "": {
+      "model": "blockextractor:block/extractor_block"
+    }
+  }
+}
