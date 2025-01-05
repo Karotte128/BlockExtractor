@@ -31,6 +31,7 @@ public class BlockExtractor {
 
     public BlockExtractor(IEventBus modEventBus, ModContainer modContainer) {
         modEventBus.addListener(this::commonSetup);
+        modEventBus.addListener(ModBlockEntities::onRegisterCapabilities);
 
         NeoForge.EVENT_BUS.register(this);
 
