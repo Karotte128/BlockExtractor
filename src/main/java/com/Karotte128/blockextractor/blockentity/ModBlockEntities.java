@@ -14,7 +14,7 @@ public class ModBlockEntities {
             DeferredRegister.create(Registries.BLOCK_ENTITY_TYPE, BlockExtractor.MODID);
 
     public static final Supplier<BlockEntityType<ExtractorBlockEntity>> EXTRACTOR_BLOCK_ENTITY = BLOCK_ENTITY_TYPES.register(
-            "my_block_entity",
+            "extractor_block_entity",
             () -> BlockEntityType.Builder.of(
                             ExtractorBlockEntity::new,
                             ModBlocks.EXTRACTOR_BLOCK.get()
