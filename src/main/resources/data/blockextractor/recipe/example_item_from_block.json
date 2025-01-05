@@ -1,6 +1,6 @@
 {
   "type": "blockextractor:extracting",
-  "ingredient": {
+  "block": {
     "item": "blockextractor:example_block"
   },
   "result": {
