@@ -79,14 +79,13 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
     public void tick(Level level, BlockPos blockPos, BlockState state) {
 
         if (!level.isClientSide()) {
-            tickCounter++;
+            tickCounter--;
 
-            if (tickCounter == 20) {
+            if (tickCounter <= 0) {
                 BlockPos belowPos = blockPos.below();
                 BlockState belowBlockState = level.getBlockState(belowPos);
 
                 craftItem(belowBlockState);
-                tickCounter = 0;
             }
         }
     }
@@ -101,7 +100,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
         ItemStack containerItemStack = itemHandler.getStackInSlot(0);
 
         if (!recipe.isEmpty()) {
-            ItemStack outputStack = new ItemStack(recipe.get().value().output().getItem(), 1);
+            ItemStack outputStack = new ItemStack(recipe.get().value().outputItems().getItem(), 1);
 
             if (containerItemStack.getItem().equals(outputStack.getItem())) {
                 int count = itemHandler.getStackInSlot(0).getCount();
@@ -111,6 +110,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
             } else if (containerItemStack.isEmpty()) {
                 itemHandler.setStackInSlot(0, outputStack);
             }
+            tickCounter = recipe.get().value().processingTicks();
         }
     }
 }

@@ -13,7 +13,7 @@ public class ModRecipes {
     public static final DeferredRegister<RecipeSerializer<?>> SERIALIZERS = DeferredRegister.create(Registries.RECIPE_SERIALIZER, BlockExtractor.MODID);
     public static final DeferredRegister<RecipeType<?>> TYPES = DeferredRegister.create(Registries.RECIPE_TYPE, BlockExtractor.MODID);
 
-    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<BlockExtractorRecipe>> BLOCK_EXTRACTOR_SERIALIZER = SERIALIZERS.register("extracting", BlockExtractorRecipe.Serializer::new);
+    public static final DeferredHolder<RecipeSerializer<?>, RecipeSerializer<BlockExtractorRecipe>> BLOCK_EXTRACTOR_SERIALIZER = SERIALIZERS.register("extracting", BlockExtractorRecipeSerializer::new);
     public static final DeferredHolder<RecipeType<?>, RecipeType<BlockExtractorRecipe>> BLOCK_EXTRACTOR_TYPE = TYPES.register("extracting", () -> new RecipeType<BlockExtractorRecipe>() {
         @Override
         public String toString() {
