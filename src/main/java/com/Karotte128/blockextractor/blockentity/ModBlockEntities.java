@@ -30,6 +30,7 @@ public class ModBlockEntities {
 
     public static void onRegisterCapabilities(RegisterCapabilitiesEvent event) {
         event.registerBlockEntity(Capabilities.ItemHandler.BLOCK, EXTRACTOR_BLOCK_ENTITY.get(), (object, context) -> object.getItemHandler());
+        event.registerBlockEntity(Capabilities.EnergyStorage.BLOCK, EXTRACTOR_BLOCK_ENTITY.get(), (object, context) -> object.getEnergyHandler());
     }
 
 }
