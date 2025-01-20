@@ -6,7 +6,7 @@ import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.*;
 import net.minecraft.world.level.Level;
 
-public record BlockExtractorRecipe(Ingredient inputItem, ItemStack outputItems, int processingTicks) implements Recipe<BlockExtractorInput> {
+public record BlockExtractorRecipe(Ingredient inputItem, ItemStack outputItems, int processingTicks, int energy) implements Recipe<BlockExtractorInput> {
 
     @Override
     public NonNullList<Ingredient> getIngredients() {

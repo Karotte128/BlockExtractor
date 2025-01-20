@@ -26,6 +26,7 @@ import net.neoforged.neoforge.items.ItemStackHandler;
 import org.jetbrains.annotations.Nullable;
 
 import java.util.Optional;
+import java.util.logging.Logger;
 
 public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
     public final ItemStackHandler itemHandler = new ItemStackHandler(1) {
@@ -60,14 +61,14 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
         super.saveAdditional(tag, registries);
         tag.putShort("TickCounter", (short) this.tickCounter);
         tag.put("inventory", itemHandler.serializeNBT(registries));
-        tag.put("energy", energyHandler.serializeNBT(registries));
+        tag.putInt("energy", energyHandler.getEnergyStored());
     }
 
     protected void loadAdditional(CompoundTag tag, HolderLookup.Provider registries) {
         super.loadAdditional(tag, registries);
         itemHandler.deserializeNBT(registries, tag.getCompound("inventory"));
         this.tickCounter = tag.getShort("TickCounter");
-        energyHandler.deserializeNBT(registries, tag.getCompound("energy"));
+        energyHandler.receiveEnergy(tag.getInt("energy"), false);
     }
 
     public @Nullable IItemHandler getItemHandler() {
@@ -89,14 +90,18 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
     public void tick(Level level, BlockPos blockPos, BlockState state) {
 
         if (!level.isClientSide()) {
-            tickCounter--;
-
-            if (tickCounter <= 0) {
+            if (tickCounter > 0) {
+                tickCounter--;
+            } else if (tickCounter == 0) {
                 BlockPos belowPos = blockPos.below();
                 BlockState belowBlockState = level.getBlockState(belowPos);
 
                 craftItem(belowBlockState);
+            } else if (tickCounter < 0) {
+                System.out.println("tick counter smaller than 0");
+                tickCounter = 0;
             }
+
         }
     }
 
@@ -110,17 +115,20 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
         ItemStack containerItemStack = itemHandler.getStackInSlot(0);
 
         if (!recipe.isEmpty()) {
-            ItemStack outputStack = new ItemStack(recipe.get().value().outputItems().getItem(), 1);
+            if (recipe.get().value().energy() <= energyHandler.getEnergyStored()) {
+                ItemStack outputStack = new ItemStack(recipe.get().value().outputItems().getItem(), 1);
 
-            if (containerItemStack.getItem().equals(outputStack.getItem())) {
-                int count = itemHandler.getStackInSlot(0).getCount();
-                int newCount = Math.min(count + 1, 64);
-                containerItemStack.setCount(newCount);
-                itemHandler.setStackInSlot(0, containerItemStack);
-            } else if (containerItemStack.isEmpty()) {
-                itemHandler.setStackInSlot(0, outputStack);
+                if (containerItemStack.getItem().equals(outputStack.getItem())) {
+                    int count = itemHandler.getStackInSlot(0).getCount();
+                    int newCount = Math.min(count + 1, 64);
+                    containerItemStack.setCount(newCount);
+                    itemHandler.setStackInSlot(0, containerItemStack);
+                } else if (containerItemStack.isEmpty()) {
+                    itemHandler.setStackInSlot(0, outputStack);
+                }
+                tickCounter = recipe.get().value().processingTicks();
+                energyHandler.extractEnergy(recipe.get().value().energy(), false);
             }
-            tickCounter = recipe.get().value().processingTicks();
         }
     }
 }

@@ -4,6 +4,7 @@
     "item": "blockextractor:example_block"
   },
   "ticks": 20,
+  "energy": 100,
   "result": {
     "id": "blockextractor:example_item"
   }

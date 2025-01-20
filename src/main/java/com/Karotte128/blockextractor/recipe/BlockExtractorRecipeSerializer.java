@@ -14,7 +14,8 @@ public class BlockExtractorRecipeSerializer implements RecipeSerializer<BlockExt
     public static final MapCodec<BlockExtractorRecipe> CODEC = RecordCodecBuilder.mapCodec(inst -> inst.group(
                     Ingredient.CODEC_NONEMPTY.fieldOf("block").forGetter(BlockExtractorRecipe::inputItem),
                     ItemStack.CODEC.fieldOf("result").forGetter(BlockExtractorRecipe::outputItems),
-                    Codec.INT.fieldOf("ticks").forGetter(BlockExtractorRecipe::processingTicks)
+                    Codec.INT.fieldOf("ticks").forGetter(BlockExtractorRecipe::processingTicks),
+                    Codec.INT.fieldOf("energy").forGetter(BlockExtractorRecipe::energy)
             )
             .apply(inst, BlockExtractorRecipe::new));
     public static final StreamCodec<RegistryFriendlyByteBuf, BlockExtractorRecipe> STREAM_CODEC =
@@ -22,6 +23,7 @@ public class BlockExtractorRecipeSerializer implements RecipeSerializer<BlockExt
                     Ingredient.CONTENTS_STREAM_CODEC, BlockExtractorRecipe::inputItem,
                     ItemStack.STREAM_CODEC, BlockExtractorRecipe::outputItems,
                     ByteBufCodecs.INT, BlockExtractorRecipe::processingTicks,
+                    ByteBufCodecs.INT, BlockExtractorRecipe::energy,
                     BlockExtractorRecipe::new
             );
 
