@@ -1,5 +1,6 @@
 package com.Karotte128.blockextractor.blockentity;
 
+import com.Karotte128.blockextractor.Config;
 import com.Karotte128.blockextractor.menu.ExtractorMenu;
 import com.Karotte128.blockextractor.recipe.BlockExtractorInput;
 import com.Karotte128.blockextractor.recipe.BlockExtractorRecipe;
@@ -40,7 +41,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
         }
     };
 
-    public final EnergyStorage energyHandler = new EnergyStorage(10000);
+    public final EnergyStorage energyHandler = new EnergyStorage(Config.energyStorage);
 
     int tickCounter = 0;
 
