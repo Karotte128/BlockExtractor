@@ -14,6 +14,7 @@ import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.crafting.RecipeHolder;
 import net.minecraft.world.level.Level;
@@ -116,15 +117,16 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
 
         if (!recipe.isEmpty()) {
             if (recipe.get().value().energy() <= energyHandler.getEnergyStored()) {
-                ItemStack outputStack = new ItemStack(recipe.get().value().outputItems().getItem(), 1);
+                Item outputItem = recipe.get().value().outputItems().getItem();
+                int outputAmount = recipe.get().value().outputItems().getCount();
 
-                if (containerItemStack.getItem().equals(outputStack.getItem())) {
+                if (containerItemStack.getItem().equals(outputItem)) {
                     int count = itemHandler.getStackInSlot(0).getCount();
-                    int newCount = Math.min(count + 1, 64);
+                    int newCount = Math.min(count + outputAmount, 64);
                     containerItemStack.setCount(newCount);
                     itemHandler.setStackInSlot(0, containerItemStack);
                 } else if (containerItemStack.isEmpty()) {
-                    itemHandler.setStackInSlot(0, outputStack);
+                    itemHandler.setStackInSlot(0, new ItemStack(outputItem, outputAmount));
                 }
                 tickCounter = recipe.get().value().processingTicks();
                 energyHandler.extractEnergy(recipe.get().value().energy(), false);
