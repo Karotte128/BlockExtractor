@@ -116,7 +116,7 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
         ItemStack containerItemStack = itemHandler.getStackInSlot(0);
 
         if (!recipe.isEmpty()) {
-            if (recipe.get().value().energy() <= energyHandler.getEnergyStored()) {
+            if (recipe.get().value().energy() <= energyHandler.getEnergyStored() || !Config.useEnergy) {
                 Item outputItem = recipe.get().value().outputItems().getItem();
                 int outputAmount = recipe.get().value().outputItems().getCount();
 
@@ -129,7 +129,9 @@ public class ExtractorBlockEntity extends BlockEntity implements MenuProvider {
                     itemHandler.setStackInSlot(0, new ItemStack(outputItem, outputAmount));
                 }
                 tickCounter = recipe.get().value().processingTicks();
-                energyHandler.extractEnergy(recipe.get().value().energy(), false);
+                if (Config.useEnergy) {
+                    energyHandler.extractEnergy(recipe.get().value().energy(), false);
+                }
             }
         }
     }

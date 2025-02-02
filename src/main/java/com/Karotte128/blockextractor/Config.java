@@ -13,12 +13,18 @@ public class Config {
             .comment("Amount of energy the extractor can store")
             .defineInRange("storedEnergy", 10000, 0, Integer.MAX_VALUE);
 
+    private static final ModConfigSpec.BooleanValue USE_ENERGY = BUILDER
+            .comment("Whether to use energy. Disable this if your modpack has no FE generators.")
+            .define("useEnergy", true);
+
     static final ModConfigSpec SPEC = BUILDER.build();
 
     public static int energyStorage;
+    public static boolean useEnergy;
 
     @SubscribeEvent
     static void onLoad(final ModConfigEvent event) {
         energyStorage = ENERGY_STORAGE.get();
+        useEnergy = USE_ENERGY.get();
     }
 }
