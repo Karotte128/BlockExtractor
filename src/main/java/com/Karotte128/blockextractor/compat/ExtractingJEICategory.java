@@ -1,6 +1,7 @@
 package com.Karotte128.blockextractor.compat;
 
 import com.Karotte128.blockextractor.BlockExtractor;
+import com.Karotte128.blockextractor.Config;
 import com.Karotte128.blockextractor.block.ModBlocks;
 import com.Karotte128.blockextractor.recipe.BlockExtractorRecipe;
 import mezz.jei.api.constants.VanillaTypes;
@@ -66,9 +67,11 @@ public class ExtractingJEICategory implements IRecipeCategory<BlockExtractorReci
     public void draw(BlockExtractorRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
         var font = Minecraft.getInstance().font;
         var color = ChatFormatting.BLACK.getColor();
-        var textEnergy = "Used Energy: " + recipe.energy() + " FE";
-        var textTicks = "Tick Delay: " + recipe.processingTicks() + " ticks";
-        guiGraphics.drawString(font, textEnergy, 40, 15, color, false);
+        var textEnergy = Component.translatable("gui.blockextractor.jei.energy", recipe.energy()).getString();
+        var textTicks = Component.translatable("gui.blockextractor.jei.ticks", recipe.processingTicks()).getString();
+        if (Config.useEnergy) {
+            guiGraphics.drawString(font, textEnergy, 40, 15, color, false);
+        }
         guiGraphics.drawString(font, textTicks, 40, 65, color, false);
     }
 }

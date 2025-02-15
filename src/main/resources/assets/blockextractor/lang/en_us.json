@@ -2,5 +2,7 @@
   "itemGroup.blockextractor_tab": "Block Extractor",
   "block.blockextractor.extractor_block": "Extractor",
   "block.blockextractor.example_block": "Example Block",
-  "item.blockextractor.example_item": "Example Item"
+  "item.blockextractor.example_item": "Example Item",
+  "gui.blockextractor.jei.energy": "Energy: %s FE",
+  "gui.blockextractor.jei.ticks": "Tick Delay: %s ticks"
 }
