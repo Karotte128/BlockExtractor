@@ -1,0 +1,7 @@
+{
+  "replace": false,
+  "values": [
+  "blockextractor:example_block",
+  "blockextractor:example_item"
+  ]
+}
