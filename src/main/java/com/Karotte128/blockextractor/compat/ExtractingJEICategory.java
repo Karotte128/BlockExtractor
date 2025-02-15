@@ -23,7 +23,7 @@ import org.jetbrains.annotations.Nullable;
 
 public class ExtractingJEICategory implements IRecipeCategory<BlockExtractorRecipe> {
     public static final ResourceLocation UID = ResourceLocation.fromNamespaceAndPath(BlockExtractor.MODID, "extracting");
-    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(BlockExtractor.MODID, "textures/gui/extractor/extractor_gui.png");
+    public static final ResourceLocation TEXTURE = ResourceLocation.fromNamespaceAndPath(BlockExtractor.MODID, "textures/gui/jei/extractor_gui.png");
 
     public static final RecipeType<BlockExtractorRecipe> EXTRACTOR_RECIPE_TYPE = new RecipeType<>(UID, BlockExtractorRecipe.class);
 
