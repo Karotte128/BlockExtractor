@@ -6,11 +6,15 @@ import com.Karotte128.blockextractor.recipe.BlockExtractorRecipe;
 import mezz.jei.api.constants.VanillaTypes;
 import mezz.jei.api.gui.builder.IRecipeLayoutBuilder;
 import mezz.jei.api.gui.drawable.IDrawable;
+import mezz.jei.api.gui.ingredient.IRecipeSlotsView;
 import mezz.jei.api.helpers.IGuiHelper;
 import mezz.jei.api.recipe.IFocusGroup;
 import mezz.jei.api.recipe.RecipeIngredientRole;
 import mezz.jei.api.recipe.RecipeType;
 import mezz.jei.api.recipe.category.IRecipeCategory;
+import net.minecraft.ChatFormatting;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.network.chat.Component;
 import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.item.ItemStack;
@@ -56,5 +60,15 @@ public class ExtractingJEICategory implements IRecipeCategory<BlockExtractorReci
         builder.addSlot(RecipeIngredientRole.INPUT, 40, 35).addIngredients(recipe.getIngredients().get(0));
 
         builder.addSlot(RecipeIngredientRole.OUTPUT, 80, 35).addItemStack(recipe.getResultItem(null));
+    }
+
+    @Override
+    public void draw(BlockExtractorRecipe recipe, IRecipeSlotsView recipeSlotsView, GuiGraphics guiGraphics, double mouseX, double mouseY) {
+        var font = Minecraft.getInstance().font;
+        var color = ChatFormatting.BLACK.getColor();
+        var textEnergy = "Used Energy: " + recipe.energy() + " FE";
+        var textTicks = "Tick Delay: " + recipe.processingTicks() + " ticks";
+        guiGraphics.drawString(font, textEnergy, 40, 15, color, false);
+        guiGraphics.drawString(font, textTicks, 40, 65, color, false);
     }
 }
