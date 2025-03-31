@@ -22,6 +22,7 @@ public class ModBlocks {
                     .strength(2f)
                     .requiresCorrectToolForDrops()
                     .sound(SoundType.COPPER_GRATE)
+                    .noOcclusion()
             ));
 
     public static final DeferredBlock<Block> EXAMPLE_BLOCK = registerBlock("example_block",
