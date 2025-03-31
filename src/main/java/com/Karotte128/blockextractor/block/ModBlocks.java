@@ -25,12 +25,12 @@ public class ModBlocks {
                     .noOcclusion()
             ));
 
-    public static final DeferredBlock<Block> EXAMPLE_BLOCK = registerBlock("example_block",
-            () -> new Block(BlockBehaviour.Properties.of()
-                    .strength(4f)
-                    .requiresCorrectToolForDrops()
-                    .sound(SoundType.AMETHYST)
-            ));
+//    public static final DeferredBlock<Block> EXAMPLE_BLOCK = registerBlock("example_block",
+//            () -> new Block(BlockBehaviour.Properties.of()
+//                    .strength(4f)
+//                    .requiresCorrectToolForDrops()
+//                    .sound(SoundType.AMETHYST)
+//            ));
 
     private static <T extends Block> DeferredBlock<T> registerBlock(String name, Supplier<T> block) {
         DeferredBlock<T> toReturn = BLOCKS.register(name, block);
